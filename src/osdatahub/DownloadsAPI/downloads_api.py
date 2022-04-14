@@ -1,6 +1,6 @@
 from typing import Union
 import requests
-from typeguard import check_argument_types
+from typeguard import typechecked
 
 
 class OpenDataDownload:
@@ -29,7 +29,7 @@ class DataPackagesDownload:
     __HEADERS = {"method": "GET",
                  "headers": "{'Content-Type': 'application/json'}"}
 
-    def __init__(self, key):
+    def __init__(self, key: str) -> None:
         self.key = key
 
     @property
@@ -52,11 +52,11 @@ class DataPackagesDownload:
             return f"{endpoint}/versions"
         return endpoint
 
+    @typechecked
     def query(self, data_package_id: Union[str, int] = None,
               get_versions: bool = False,
               version_id: Union[str, int] = None,
               file_name: str = None) -> Union[dict, list, str]:
-        assert check_argument_types()
         endpoint = self.__get_endpoint(data_package_id, get_versions,
                                        version_id, file_name)
         response = requests.get(url=endpoint, headers=self.headers)
