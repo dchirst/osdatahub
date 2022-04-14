@@ -7,7 +7,7 @@ def test__get_endpoint():
         param(
             "1",
             True,
-            "2",
+            2,
             "bob",
             "https://api.os.uk/downloads/v1/dataPackages/1/versions/2/downloads?fileName=bob",
             id="All values supplied"
